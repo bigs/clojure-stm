@@ -8,20 +8,19 @@
   ;; when the threads have all terminated.  spawn n threads
   ;; to add items to the list and then loop until they have
   ;; all finished. 
- (let [my-count (ref 0)]
+ (do
    (dotimes [i n]
      ;; spawn our threads.  we create an an anonymous function
      ;; taking advantage of closures to add 'i' to the list and
      ;; update our counter, all within a transaction.
      (.start (Thread. (fn []
                         (dosync (ref-set my-list
-                                         (conj @my-list i))
-                          (ref-set my-count (inc @my-count)))))))
-   (loop [count @my-count]
+                                         (conj @my-list i)))))))
+   (loop [my-count (count @my-list)]
      ;; loop until our barrier has reached its limit, then
      ;; print out the vector.
-     (if (< count n)
-       (recur @my-count)
+     (if (< my-count n)
+       (recur (count @my-list))
        (println @my-list)))))
 
 (defn -main [& args]
