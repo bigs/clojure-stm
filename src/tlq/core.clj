@@ -19,7 +19,14 @@
      ;; print out the vector.
      (if (< my-count n)
        (recur (count @my-list))
-       (println @my-list)))))
+       @my-list))))
+
+(defn usage []
+  (do
+    (println "usage: lein run <n>")
+    (println "  n = number of threads")))
 
 (defn -main [& args]
-  (thread-test (read-string (first args))))
+  (if (= (count args) 1)
+    (println (thread-test (read-string (first args))))
+    (usage)))
