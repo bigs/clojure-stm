@@ -4,10 +4,8 @@
 (def my-list (ref (vec nil)))
 
 (defn thread-test [n]
-  ;; make a counter ref (barrier) we can use to determine
-  ;; when the threads have all terminated.  spawn n threads
-  ;; to add items to the list and then loop until they have
-  ;; all finished. 
+  ;; spawn n threads to add items to the list and then
+  ;; loop until they have all finished. 
  (do
    (dotimes [i n]
      ;; spawn our threads.  we create an an anonymous function
