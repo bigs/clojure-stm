@@ -1,0 +1,16 @@
+# tlq
+
+quick demonstration of references and STM in clojure.  creates
+a ref to a vector and then spawns n threads to fill it with n
+items, showing that no data is lost in the threaded environment.
+
+## Usage
+
+lein run <n>
+where n is the number of items/threads
+
+## License
+
+Copyright (C) 2012 cole brown
+
+Distributed under the Eclipse Public License, the same as Clojure.
